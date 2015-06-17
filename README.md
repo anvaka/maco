@@ -1,6 +1,6 @@
 # Maco
 
-This simple script allows you to avoid using javascript "classes" when dealing
+This script allows you to avoid using javascript "classes" when dealing
 with React.
 
 # Example
@@ -18,20 +18,21 @@ function counter(x) {
   setInterval(updateMessage, 1000);
 
   function updateMessage() {
-    i++; // `i` is truly encapsulated. nobody can modify it, but this counter.
+    i++; // `i` is truly encapsulated. Nobody but this counter can modify it.
 
-    x.forceUpdate(); // tell React to queue the update for us.
+    x.forceUpdate(); // tell React to enqueue the update.
   }
 
   // tell React how to render this component
   x.render = function () {
+    // notise regular props, as well as internal `i`:
     return <h2>{x.props.name}: {i}</h2>;
   }
 }
 ```
 
-Now that we've created counter, no extra logic is required to use it from
-regular react application:
+Now that we have a Counter, no extra logic is required to use it from
+react application:
 
 ``` js
 // app.js file
@@ -43,10 +44,10 @@ React.render(<div><Counter name="my counter" /></div>, document.body);
 
 This approach has couple benefits:
 
-* Unlike prototype-based classes, with maco you can truly encapsulate your data:
+* Unlike prototype-based classes, maco allows you to truly encapsulate data:
 It's just a regular javascript closure.
-* No need to remember what is `this` anymore. Your component instance is always
-passed as a single argument to the function. In the example above it's called `x`.
+* No need to remember what is `this` anymore. The component instance is
+passed as an argument to the function. In the example above it's called `x`.
 * Dead simple.
 
 # How?
@@ -67,10 +68,10 @@ function maco(factory) {
 }
 ```
 
-I'm just creates a new component, inherits it from `React.Component` and from
-the constructor invokes your "factory" method. Factory function is bound to the
-current component. In other words `this` will be the same as what you would
-normally expect from React.
+We create a new child of `React.Component` and from the constructor invoke
+the "factory" callback. Factory callback is bound to the current component.
+In other words `this` will be the same as what you'd normally expect from
+React.
 
 I'm also passing current component instance as an argument to the factory
 function. It is just for your convenience, so you don't have to do silly
