@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/anvaka/maco/issues"
   },
-  "homepage": "https://github.com/anvaka/maco"
+  "homepage": "https://github.com/anvaka/maco",
+  "dependencies": {
+    "react": "^0.13.3"
+  }
 }
