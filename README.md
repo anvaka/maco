@@ -25,7 +25,7 @@ function counter(x) {
 
   // tell React how to render this component
   x.render = function () {
-    // notise regular props, as well as internal `i`:
+    // notice regular props, as well as internal `i`:
     return <h2>{x.props.name}: {i}</h2>;
   }
 }
