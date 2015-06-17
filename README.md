@@ -1,7 +1,7 @@
 # Maco
 
 This script allows you to avoid using javascript "classes" when dealing
-with React.
+with React and enables true encapsulation via closures.
 
 # Example
 
