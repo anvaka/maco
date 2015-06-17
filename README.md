@@ -5,7 +5,7 @@ with React and enables true encapsulation via closures.
 
 # Example
 
-Let's take a look at simple counter component:
+Let's take a look at simple `Counter` component:
 
 ``` js
 // counter.js file
@@ -13,7 +13,7 @@ Let's take a look at simple counter component:
 module.exports = require('maco')(counter);
 
 function counter(x) {
-  // we wll increase counter `i` every second:
+  // we will increase counter `i` every second:
   var i = 0;
   setInterval(updateMessage, 1000);
 
