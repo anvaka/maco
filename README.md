@@ -9,7 +9,7 @@ Let's take a look at simple `Counter` component:
 
 ``` js
 // counter.js file
-
+var React = require('react');
 module.exports = require('maco')(counter);
 
 function counter(x) {
