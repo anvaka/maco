@@ -1,19 +1,19 @@
 # Maco
 
 This script allows you to avoid using javascript "classes" when dealing
-with React.
+with React and enables true encapsulation via closures.
 
 # Example
 
-Let's take a look at simple counter component:
+Let's take a look at simple `Counter` component:
 
 ``` js
 // counter.js file
-
+var React = require('react');
 module.exports = require('maco')(counter);
 
 function counter(x) {
-  // we wll increase counter `i` every second:
+  // we will increase counter `i` every second:
   var i = 0;
   setInterval(updateMessage, 1000);
 
@@ -25,7 +25,7 @@ function counter(x) {
 
   // tell React how to render this component
   x.render = function () {
-    // notise regular props, as well as internal `i`:
+    // notice regular props, as well as internal `i`:
     return <h2>{x.props.name}: {i}</h2>;
   }
 }
