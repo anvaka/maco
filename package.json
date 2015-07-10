@@ -1,6 +1,6 @@
 {
   "name": "maco",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "classless react",
   "main": "index.js",
   "scripts": {
