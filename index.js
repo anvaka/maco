@@ -1,6 +1,7 @@
 var React = require('react');
 
 module.exports = makeIt;
+makeIt.template = makeTemplate;
 
 function makeIt(factory) {
   inherits(Maker, React.Component);
@@ -12,6 +13,15 @@ function makeIt(factory) {
     Maker.prototype.constructor.call(this, props);
     factory.bind(this)(this);
   }
+}
+
+function makeTemplate(factory) {
+  // templates only care about rendering
+  return React.createClass({
+    render: function() {
+      return factory.bind(this)(this.props)
+    }
+  });
 }
 
 function classCallCheck(instance, Constructor) {
