@@ -23,6 +23,10 @@
   },
   "homepage": "https://github.com/anvaka/maco",
   "devDependencies": {
+    "babel-preset-react": "^6.3.13",
+    "babelify": "^7.2.0",
+    "react": "^0.14.5",
+    "react-dom": "^0.14.5",
     "tap": "^4.0.0"
   }
 }
