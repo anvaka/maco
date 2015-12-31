@@ -36,18 +36,26 @@ react application:
 
 ``` js
 // app.js file
+var ReactDOM = require('react-dom');
 var Counter = require('./counter.js');
+
 ReactDOM.render(
   <Counter name="my counter" />,
   document.getElementById('root')
 );
 ```
 
+The demo source code is [available here](https://github.com/anvaka/maco/tree/master/demo).
+Running example is [here](//anvaka.github.io/maco/demo/).
+
+## single React instance
+
 React instance is required to avoid multiple versions of React in the same
-bundle. For your convenience you can bind maco to your own react like so:
+bundle. For your convenience you can bind `maco` to your own React instance
+like so:
 
 ``` js
-// in your local project, let's say maco.js is the name of this file
+// in your local project, let's say lib/maco.js is the name of this file
 var React = require('react');
 module.exports = require('maco').bindToReact(React);
 
