@@ -9,6 +9,7 @@ makeIt.bindToReact = function (React) {
 
 function makeIt(factory, React) {
   inherits(Maker, React.Component);
+  Maker.displayName = factory.name;
 
   return Maker;
 

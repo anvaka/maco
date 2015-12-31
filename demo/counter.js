@@ -1,6 +1,12 @@
 // counter.js file
 var React = require('react');
-module.exports = require('../')(counter, React);
+
+var Counter = require('../')(counter, React);
+
+Counter.propTypes = { name: React.PropTypes.string };
+Counter.defaultProps = { name: 'My counter' };
+
+module.exports = Counter;
 
 function counter(x) {
   // we will increase counter `i` every second:

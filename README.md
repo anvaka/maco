@@ -45,6 +45,27 @@ ReactDOM.render(
 );
 ```
 
+## defaultProps and propTypes
+
+When authoring react components it's often desirable to set `defaultProps` and
+`propTypes`. [Facebook recommends](https://facebook.github.io/react/docs/reusable-components.html#es6-classes)
+to use constructor function, so let's do it:
+
+``` js
+// counter.js file
+var React = require('react');
+var Counter = require('maco')(counter, React);
+
+Counter.propTypes = { name: React.PropTypes.string };
+Counter.defaultProps = { name: 'My counter' };
+
+module.exports Counter;
+```
+
+This will result in standard behavior for `propTypes` validation and initial
+value assignment.
+
+## demo
 The demo source code is [available here](https://github.com/anvaka/maco/tree/master/demo).
 Running example is [here](//anvaka.github.io/maco/demo/).
 

@@ -4,12 +4,18 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Counter = require('./counter.js');
 
-ReactDOM.render(React.createElement(Counter, { name: 'my counter' }), document.getElementById('root'));
+ReactDOM.render(React.createElement(Counter, null), document.getElementById('root'));
 
 },{"./counter.js":2,"react":161,"react-dom":32}],2:[function(require,module,exports){
 // counter.js file
 var React = require('react');
-module.exports = require('../')(counter, React);
+
+var Counter = require('../')(counter, React);
+
+Counter.propTypes = { name: React.PropTypes.string };
+Counter.defaultProps = { name: 'My counter' };
+
+module.exports = Counter;
 
 function counter(x) {
   // we will increase counter `i` every second:
@@ -47,6 +53,7 @@ makeIt.bindToReact = function (React) {
 
 function makeIt(factory, React) {
   inherits(Maker, React.Component);
+  Maker.displayName = factory.name;
 
   return Maker;
 
