@@ -1,7 +1,7 @@
-# Maco
+# maco [![Build Status](https://travis-ci.org/anvaka/maco.svg)](https://travis-ci.org/anvaka/maco)
 
 This script allows you to avoid using javascript "classes" when dealing
-with React and enables true encapsulation via closures.
+with React. This enables true encapsulation via closures.
 
 # Example
 
@@ -10,7 +10,7 @@ Let's take a look at simple `Counter` component:
 ``` js
 // counter.js file
 var React = require('react');
-module.exports = require('maco')(counter);
+module.exports = require('maco')(counter, React);
 
 function counter(x) {
   // we will increase counter `i` every second:
@@ -37,7 +37,27 @@ react application:
 ``` js
 // app.js file
 var Counter = require('./counter.js');
-React.render(<div><Counter name="my counter" /></div>, document.body);
+ReactDOM.render(
+  <Counter name="my counter" />,
+  document.getElementById('root')
+);
+```
+
+React instance is required to avoid multiple versions of React in the same
+bundle. For your convenience you can bind maco to your own react like so:
+
+``` js
+// in your local project, let's say maco.js is the name of this file
+var React = require('react');
+module.exports = require('maco').bindToReact(React);
+
+// now any other file (let's say counter.js) in your project can do
+module.exports = require('./lib/maco.js')(counter);
+
+function counter(x) {
+  var i = 42;
+  x.render = function () { return <h2>Hello {i}</h2> }
+}
 ```
 
 # Why?
@@ -56,14 +76,14 @@ passed as an argument to the function. In the example above it's called `x`.
 several lines long:
 
 ``` js
-function maco(factory) {
+function maco(factory, React) {
   inherits(Maker, React.Component);
 
   return Maker;
 
   function Maker(props) {
     Maker.prototype.constructor.call(this, props);
-    factory.bind(this)(this);
+    factory.call(this, this);
   }
 }
 ```
@@ -73,8 +93,8 @@ the "factory" callback. Factory callback is bound to the current component.
 In other words `this` will be the same as what you'd normally expect from
 React.
 
-I'm also passing current component instance as an argument to the factory
-function. It is just for your convenience, so you don't have to do silly
+I'm passing current component instance (`this`) as an argument to the `factory
+function`. It is just for your convenience, so you don't have to do silly
 `that = this` dance.
 
 # install

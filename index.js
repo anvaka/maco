@@ -1,9 +1,13 @@
-var React = require('react');
-
 module.exports = makeIt;
 makeIt.template = makeTemplate;
 
-function makeIt(factory) {
+makeIt.bindToReact = function (React) {
+  return function (factory) {
+    return makeIt(factory, React);
+  };
+};
+
+function makeIt(factory, React) {
   inherits(Maker, React.Component);
 
   return Maker;
@@ -11,15 +15,15 @@ function makeIt(factory) {
   function Maker(props) {
     classCallCheck(this, Maker);
     Maker.prototype.constructor.call(this, props);
-    factory.bind(this)(this);
+    factory.call(this, this);
   }
 }
 
-function makeTemplate(factory) {
+function makeTemplate(factory, React) {
   // templates only care about rendering
   return React.createClass({
     render: function() {
-      return factory.bind(this)(this.props)
+      return factory.bind(this)(this.props);
     }
   });
 }
