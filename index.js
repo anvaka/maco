@@ -8,6 +8,8 @@ makeIt.bindToReact = function (React) {
 };
 
 function makeIt(factory, React) {
+  assertArguments(factory, React);
+
   inherits(Maker, React.Component);
   Maker.displayName = factory.name;
 
@@ -42,4 +44,13 @@ function inherits(subClass, superClass) {
 
   subClass.prototype = Object.create(superClass && superClass.prototype);
   if (superClass) subClass.__proto__ = superClass;
+}
+
+function assertArguments(factory, React) {
+  if (typeof factory !== 'function') {
+    throw new Error('factory argument is supposed to be a function. See documentation: https://github.com/anvaka/maco');
+  }
+  if (!React || !React.Component) {
+    throw new Error('React is supposed to be passed to maco');
+  }
 }
